@@ -17,4 +17,12 @@ export const theme = extendTheme({
       '400': '#F0F0F0',
     },
   },
+  styles: {
+    global: {
+      body: {
+        bg: '#FFFFFF',
+        color: 'gray.600',
+      },
+    },
+  },
 });
