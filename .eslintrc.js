@@ -78,5 +78,7 @@ module.exports = {
     'prettier/prettier': 'error',
     'no-underscore-dangle': 'off',
     'react/require-default-props': 'off',
+    'react/no-children-prop': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
   },
 };

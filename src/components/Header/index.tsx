@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 
+import { DatePicker } from '../DatePicker';
 import { Select } from '../Select';
 import { Profile } from './Profile';
 import { SignInButton } from './SignInButton';
@@ -51,6 +52,12 @@ export const Header: React.FC<HeaderProps> = ({ isLoggedIn = false }) => {
               placeholder="Escolha um Pet"
               closeMenuOnSelect={false}
             />
+          )}
+
+          {isLoggedIn && (
+            <Box ml="20px">
+              <DatePicker />
+            </Box>
           )}
         </Flex>
 
