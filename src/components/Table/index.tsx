@@ -1,5 +1,7 @@
 import {
   Box,
+  Flex,
+  Text,
   Table as ChakraTable,
   Thead,
   Tr,
@@ -8,40 +10,49 @@ import {
   Td,
 } from '@chakra-ui/react';
 
-import { Pagination } from '../Pagination';
+type Column = {
+  title: string;
+  field: string;
+}
 
 type TableProps = {
-  usePagination?: boolean;
+  columns: Column[];
+  rows: any[];
+  height?: string;
 };
 
-export const Table: React.FC<TableProps> = ({ usePagination = false }) => {
+export const Table: React.FC<TableProps> = ({ columns, rows, height }) => {  
+  const customHeight = height && height?.length > 0 ? height : '100%'
+
   return (
-    <Box w="100%">
-      <ChakraTable variant="simple">
+    <Box w="100%" h={customHeight} overflowY="auto">
+      <ChakraTable variant="striped" h={customHeight}>
         <Thead>
-          <Tr>
-            <Th>Refeição</Th>
-            <Th isNumeric>Status</Th>
-          </Tr>
+          {columns.map(column => (
+            <Th key={column.field} textAlign="center" position="sticky">{column.title}</Th>
+          ))}
         </Thead>
 
         <Tbody>
-          <Tr>
-            <Td>08:00</Td>
-            <Td isNumeric>Comeu no horário</Td>
-          </Tr>
-          <Tr>
-            <Td>14:00</Td>
-            <Td isNumeric>Não comeu no Horário</Td>
-          </Tr>
-          <Tr>
-            <Td>20:00</Td>
-            <Td isNumeric>Aguardando Alimentação</Td>
-          </Tr>
+          {rows.map(row => (
+            <Tr key={row.id}>
+              {columns.map(column => (
+                <Td 
+                  key={`row-${row.id}-column-${column.field}`}
+                  textAlign="center"
+                  position="relative"
+                >
+                  {row[column.field]}
+                </Td>
+              ))}
+            </Tr>
+          ))}
         </Tbody>
       </ChakraTable>
 
-      {usePagination && <Pagination />}
+      <Flex mt="10px" justifyContent="flex-end">
+        <Text fontSize="lg" mb="4" color="gray.600">Total {rows.length}</Text>
+      </Flex>
     </Box>
   );
 };
