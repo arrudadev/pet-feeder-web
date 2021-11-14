@@ -1,26 +1,29 @@
 import type { NextPage } from 'next';
 
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
-import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Sidebar } from '../components/Sidebar';
-import { Table } from '../components/Table';
+import { DayliControl } from '../components/DayliControl';
 
 const Data: NextPage = () => {
   return (
-    <Flex direction="column" h="100vh">
+    <Flex direction="column">
       <Header isLoggedIn />
 
       <Flex w="100%" h="100%" my="6" maxW={1480} mx="auto" px="6">
         <Sidebar />
 
-        <Box flex="1" borderRadius={8} p="8" w="100%">
-          <Table usePagination />
-        </Box>
-      </Flex>
+        <Box flex="1" w="100%">
+          <Flex>
+            <Heading>Todos os Dados</Heading>
+          </Flex>
 
-      <Footer />
+          <Box mt="20px">
+            <DayliControl useAllColumns />
+          </Box>
+        </Box>
+      </Flex>      
     </Flex>
   );
 };
