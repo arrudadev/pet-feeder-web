@@ -33,7 +33,7 @@ export const PieChart: React.FC<PieChartProps> = ({ labels, series }) => {
       series={series}
       type="pie"
       height={250}
-      width={500}
+      width={450}
     />
   );
 };
