@@ -50,7 +50,7 @@ export const Table: React.FC<TableProps> = ({ columns, rows, height }) => {
         </Tbody>
       </ChakraTable>
 
-      <Flex mt="10px" justifyContent="flex-end">
+      <Flex mt="10px">
         <Text fontSize="lg" mb="4" color="gray.600">Total {rows.length}</Text>
       </Flex>
     </Box>
