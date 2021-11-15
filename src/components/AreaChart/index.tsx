@@ -62,7 +62,6 @@ export const AreaChart: React.FC<AreaChartProps> = ({ categories, series }) => {
       series={seriesData}
       type="area"
       height={250}
-      width={450}
     />
   );
 };

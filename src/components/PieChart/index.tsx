@@ -12,19 +12,6 @@ type PieChartProps = {
 export const PieChart: React.FC<PieChartProps> = ({ labels, series }) => {
   const options: ApexOptions = {
     labels,
-    responsive: [
-      {
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200,
-          },
-          legend: {
-            position: 'bottom',
-          },
-        },
-      },
-    ],
   };
 
   return (
@@ -33,7 +20,6 @@ export const PieChart: React.FC<PieChartProps> = ({ labels, series }) => {
       series={series}
       type="pie"
       height={250}
-      width={450}
     />
   );
 };

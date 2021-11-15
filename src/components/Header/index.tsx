@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading, useBreakpointValue } from '@chakra-ui/react';
 
 import { DatePicker } from '../DatePicker';
 import { PetSelect } from '../PetSelect';
@@ -12,6 +12,11 @@ type HeaderProps = {
 };
 
 export const Header: React.FC<HeaderProps> = ({ isLoggedIn = false }) => {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true
+  });
+
   return (
     <Flex
       borderBottomWidth="1px"
@@ -39,20 +44,20 @@ export const Header: React.FC<HeaderProps> = ({ isLoggedIn = false }) => {
             PetFeeder
           </Heading>
 
-          {isLoggedIn && (
+          {isLoggedIn && isWideVersion && (
             <PetSelect />
           )}
 
-          {isLoggedIn && (
+          {isLoggedIn && isWideVersion && (
             <Box ml="20px">
               <DatePicker />
             </Box>
           )}
         </Flex>
 
-        {isLoggedIn && <Profile />}
+        {isLoggedIn && isWideVersion && <Profile />}
 
-        {!isLoggedIn && <SignInButton />}
+        {!isLoggedIn && isWideVersion && <SignInButton />}
       </Flex>
     </Flex>
   );

@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 
-import { Flex, Grid, Heading } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Heading } from '@chakra-ui/react';
 
 import { AllMealAccompanimentChart } from '../components/AllMealAccompanimentChart';
 import { DayliControl } from '../components/DayliControl';
@@ -19,13 +19,13 @@ const Dashboard: NextPage = () => {
       <Flex direction="column">
         <Header isLoggedIn />
 
-        <Flex w="100%" h="100%" my="6" maxW={1480} mx="auto" px="6">
+        <Flex w="100%" h="100%" my="6" maxW={1480} mx="auto" px="4">
           <Flex flexDirection="column" flex="1">
             <Flex>
               <Heading>Dashboard - {selectedPetName}</Heading>
             </Flex>
 
-            <Grid templateColumns="1fr 1fr" gap="20px" mt="20px">
+            <SimpleGrid minChildWidth={['280px', '450px']} spacing="20px" mt="20px">
               <MealAccompaniment />
 
               <AllMealAccompanimentChart />
@@ -33,7 +33,7 @@ const Dashboard: NextPage = () => {
               <DayMealsChart />
 
               <DayliControl height="250px" />
-            </Grid>
+            </SimpleGrid>
           </Flex>
         </Flex>
       </Flex>
