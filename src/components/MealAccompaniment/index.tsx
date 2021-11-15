@@ -1,31 +1,37 @@
 import { Flex, Text } from '@chakra-ui/react';
 
+import { format, parseISO } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+
+import { usePet } from '../../hooks/usePet';
 import { BoxShadow } from '../BoxShadow';
 import { Table } from '../Table';
 
 export const MealAccompaniment: React.FC = () => {
+  const { dayMealAccompaniment } = usePet();
+
   const columns = [
     { 
       title: 'Horário da Refeição',
-      field: 'meal_hour'
+      field: 'datetime',
+      id: 'datetime-mealaccompaniment'
     },
     { 
       title: 'Comeu no horário correto',
-      field: 'meal_at_the_right_time'
+      field: 'status',
+      id: 'status-mealaccompaniment'
     }
   ];
 
-  const rows = [
-    {
-      id: '1asdfasdf', meal_hour: '10:33', meal_at_the_right_time: 'Não'
-    },
-    {
-      id: 'asdfasdf', meal_hour: '10:33', meal_at_the_right_time: 'Não'
-    },
-    {
-      id: 'asfdasrqwer', meal_hour: '10:33', meal_at_the_right_time: 'Não'
-    },
-  ];
+  const rows = dayMealAccompaniment.map((item, index) => {
+    return {
+      id: `${index}-mealaccompaniment`,
+      datetime: format(parseISO(item.datetime), 'HH:mm', {
+        locale: ptBR,
+      }),
+      status: item.status
+    }
+  });
 
   return (
     <BoxShadow>

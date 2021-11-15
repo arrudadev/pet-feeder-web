@@ -1,48 +1,49 @@
 import { Flex, Text } from '@chakra-ui/react';
 
+import { format, parseISO } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+
+import { usePet } from '../../hooks/usePet';
 import { BoxShadow } from '../BoxShadow';
 import { Table } from '../Table';
 
-type DayliControlProps = {
-  useAllColumns?: boolean;
+type DayliControlProps = {  
   height?: string;
 }
 
-export const DayliControl: React.FC<DayliControlProps> = ({ useAllColumns = false, height = "100%" }) => {
+export const DayliControl: React.FC<DayliControlProps> = ({ height = "100%" }) => {
+  const { dayliControlData } = usePet();
+
   const columns = [
     { 
       title: 'Data',
-      field: 'date'
+      field: 'date',
+      id: 'date-daylicontrol'
     },
     { 
       title: 'Horário da Refeição',
-      field: 'hour'
+      field: 'hour',
+      id: 'hour-daylicontrol'
     },
     { 
       title: 'Quantidade de Ração',
-      field: 'weight'
+      field: 'weight',
+      id: 'weight-daylicontrol'
     },
   ];
 
-  if (useAllColumns) {
-    columns.push({ 
-      title: 'Comeu no horário correto',
-      field: 'meal_at_the_right_time'
-    });
-  }
-
-  const rows = [
-    { id: '1', date: '13/11/2021', hour: '10:33', weight: '50g', meal_at_the_right_time: 'Não'  },
-    { id: '2', date: '13/11/2021', hour: '10:33', weight: '50g', meal_at_the_right_time: 'Não'  },
-    { id: '3', date: '13/11/2021', hour: '10:33', weight: '50g', meal_at_the_right_time: 'Não'  },
-    { id: '4', date: '13/11/2021', hour: '10:33', weight: '50g', meal_at_the_right_time: 'Não'  },
-    { id: '5', date: '13/11/2021', hour: '10:33', weight: '50g', meal_at_the_right_time: 'Não'  },
-    { id: '6', date: '13/11/2021', hour: '10:33', weight: '50g', meal_at_the_right_time: 'Não'  },
-    { id: '7', date: '13/11/2021', hour: '10:33', weight: '50g', meal_at_the_right_time: 'Não'  },
-    { id: '8', date: '13/11/2021', hour: '10:33', weight: '50g', meal_at_the_right_time: 'Não'  },
-    { id: '9', date: '13/11/2021', hour: '10:33', weight: '50g', meal_at_the_right_time: 'Não'  },
-    { id: '10', date: '13/11/2021', hour: '10:33', weight: '50g', meal_at_the_right_time: 'Não'  },
-  ];
+  const rows = dayliControlData.map((item, index) => {
+    return {
+      id: `${index}-daylicontrol`,
+      date: format(parseISO(item.datetime), 'dd/MM/yyyy', {
+        locale: ptBR,
+      }),
+      hour: format(parseISO(item.datetime), 'HH:mm', {
+        locale: ptBR,
+      }),
+      weight: item.weight
+    }
+  });
 
   return (
     <BoxShadow>

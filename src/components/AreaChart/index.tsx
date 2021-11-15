@@ -7,11 +7,11 @@ import { theme } from '@chakra-ui/react';
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 type AreaChartProps = {
-  labels?: string[];
-  series?: number[];
+  categories: string[];
+  series: number[];
 };
 
-export const AreaChart: React.FC<AreaChartProps> = ({ labels, series }) => {
+export const AreaChart: React.FC<AreaChartProps> = ({ categories, series }) => {
   const options: ApexOptions = {
     chart: {
       toolbar: {
@@ -39,15 +39,7 @@ export const AreaChart: React.FC<AreaChartProps> = ({ labels, series }) => {
       axisTicks: {
         color: theme.colors.gray[600],
       },
-      categories: [
-        '2021-11-10T10:00:00.000z',
-        '2021-11-10T11:00:00.000z',
-        '2021-11-10T12:00:00.000z',
-        '2021-11-10T13:00:00.000z',
-        '2021-11-10T14:00:00.000z',
-        '2021-11-10T15:00:00.000z',
-        '2021-11-10T16:00:00.000z',
-      ],
+      categories,
     },
     fill: {
       opacity: 0.3,
@@ -60,14 +52,14 @@ export const AreaChart: React.FC<AreaChartProps> = ({ labels, series }) => {
     },
   };
 
-  const series2 = [
-    { name: 'series1', data: [31, 120, 10, 28, 58, 60, 22, 50] },
+  const seriesData = [
+    { name: 'Quantidade de Ração', data: series },
   ];
 
   return (
     <Chart
       options={options}
-      series={series2}
+      series={seriesData}
       type="area"
       height={250}
       width={450}

@@ -1,9 +1,12 @@
 import { Text } from '@chakra-ui/react'
 
+import { usePet } from '../../hooks/usePet';
 import { BoxShadow } from '../BoxShadow';
 import { PieChart } from '../PieChart';
 
 export const AllMealAccompanimentChart: React.FC = () => {
+  const { allMealAccompanimentData } = usePet();
+
   return (
     <BoxShadow>
       <Text fontSize="lg" mb="4" color="gray.600">
@@ -12,7 +15,10 @@ export const AllMealAccompanimentChart: React.FC = () => {
 
       <PieChart
         labels={['Comeu no Horário', 'Não comeu no horário']}
-        series={[380, 560]}
+        series={[
+          allMealAccompanimentData.mealAtTheRightTime, 
+          allMealAccompanimentData.notMealAtTheRightTime
+        ]}
       />
     </BoxShadow>
   );

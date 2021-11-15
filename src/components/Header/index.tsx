@@ -3,7 +3,7 @@ import React from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/react';
 
 import { DatePicker } from '../DatePicker';
-import { Select } from '../Select';
+import { PetSelect } from '../PetSelect';
 import { Profile } from './Profile';
 import { SignInButton } from './SignInButton';
 
@@ -12,12 +12,6 @@ type HeaderProps = {
 };
 
 export const Header: React.FC<HeaderProps> = ({ isLoggedIn = false }) => {
-  const pets = [
-    { value: 'pipoca', label: 'Pipoca' },
-    { value: 'marafo', label: 'Marafo' },
-    { value: 'whisky', label: 'Whisky' },
-  ];
-
   return (
     <Flex
       borderBottomWidth="1px"
@@ -46,12 +40,7 @@ export const Header: React.FC<HeaderProps> = ({ isLoggedIn = false }) => {
           </Heading>
 
           {isLoggedIn && (
-            <Select
-              colorScheme="green"
-              options={pets}
-              placeholder="Escolha um Pet"
-              closeMenuOnSelect={false}
-            />
+            <PetSelect />
           )}
 
           {isLoggedIn && (

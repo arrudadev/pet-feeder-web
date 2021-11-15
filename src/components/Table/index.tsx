@@ -13,6 +13,7 @@ import {
 type Column = {
   title: string;
   field: string;
+  id: string;
 }
 
 type TableProps = {
@@ -29,7 +30,7 @@ export const Table: React.FC<TableProps> = ({ columns, rows, height }) => {
       <ChakraTable variant="striped" h={customHeight}>
         <Thead>
           {columns.map(column => (
-            <Th key={column.field} textAlign="center" position="sticky">{column.title}</Th>
+            <Th key={column.id} textAlign="center" position="sticky">{column.title}</Th>
           ))}
         </Thead>
 
