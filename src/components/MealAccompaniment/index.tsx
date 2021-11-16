@@ -5,6 +5,7 @@ import ptBR from 'date-fns/locale/pt-BR';
 
 import { usePet } from '../../hooks/usePet';
 import { BoxShadow } from '../BoxShadow';
+import { NoData } from '../NoData';
 import { Table } from '../Table';
 
 export const MealAccompaniment: React.FC = () => {
@@ -41,7 +42,13 @@ export const MealAccompaniment: React.FC = () => {
         </Text>
       </Flex>
 
-      <Table columns={columns} rows={rows} height="250px" />
+      {rows.length === 0 && (
+        <NoData />
+      )}
+
+      {rows.length > 0 && (
+        <Table columns={columns} rows={rows} height="250px" />
+      )}
     </BoxShadow>
   );
 }

@@ -5,6 +5,7 @@ import ptBR from 'date-fns/locale/pt-BR';
 
 import { usePet } from '../../hooks/usePet';
 import { BoxShadow } from '../BoxShadow';
+import { NoData } from '../NoData';
 import { Table } from '../Table';
 
 type DayliControlProps = {  
@@ -53,7 +54,13 @@ export const DayliControl: React.FC<DayliControlProps> = ({ height = "100%" }) =
         </Text>
       </Flex>
 
-      <Table columns={columns} rows={rows} height={height} />
+      {rows.length === 0 && (
+        <NoData />
+      )}
+
+      {rows.length > 0 && (
+        <Table columns={columns} rows={rows} height={height} />
+      )}
     </BoxShadow>
   );
 }

@@ -3,6 +3,7 @@ import { Text } from '@chakra-ui/react'
 import { usePet } from '../../hooks/usePet';
 import { AreaChart } from '../AreaChart';
 import { BoxShadow } from '../BoxShadow';
+import { NoData } from '../NoData';
 
 export const DayMealsChart: React.FC = () => {
   const { dayliControlData } = usePet();
@@ -16,7 +17,13 @@ export const DayMealsChart: React.FC = () => {
         Alimentações ao longo do dia
       </Text>
 
-      <AreaChart categories={categories} series={series} />
+      {series.length === 0 && (
+        <NoData />
+      )}
+
+      {series.length > 0 && (
+        <AreaChart categories={categories} series={series} />
+      )}
     </BoxShadow>
   );
 }
