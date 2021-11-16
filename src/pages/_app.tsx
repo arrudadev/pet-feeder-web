@@ -6,6 +6,8 @@ import { PetContextProvider } from '../contexts/PetContext';
 import { SidebarDrawerContextProvider } from '../contexts/SidebarDrawerContext';
 import { theme } from '../styles/theme';
 
+import '../services/firebase';
+
 import '../components/DatePicker/date-picker.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
