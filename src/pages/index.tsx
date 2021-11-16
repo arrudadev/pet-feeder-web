@@ -7,17 +7,18 @@ import { Header } from '../components/Header';
 
 const Lading: NextPage = () => {
   return (
-    <>
+    <Flex flexDirection="column">
       <Header />
 
       <Flex
         as="main"
         align="center"
-        justifyContent="space-between"
+        justifyContent="center"
         maxW="1480px"
         mx="auto"
         px="6"
-        h="calc(100vh - 10.5rem)"
+        flexWrap="wrap"
+        position="relative"
       >
         <Flex as="section" flexDirection="column" maxW="600px">
           <Heading
@@ -38,11 +39,11 @@ const Lading: NextPage = () => {
           </Text>
         </Flex>
 
-        <Image src="/dog.png" alt="Cachorro" h="500px" w="500px" />
+        <Image src="/dog.png" alt="Cachorro" h="50%" w="50%" />
       </Flex>
 
       <Footer />
-    </>
+    </Flex>
   );
 };
 

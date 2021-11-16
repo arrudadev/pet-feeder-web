@@ -75,7 +75,7 @@ export const Header: React.FC<HeaderProps> = ({ isLoggedIn = false }) => {
               onClick={onOpen}
             />
 
-            <Sidebar />
+            <Sidebar isLoggedIn={isLoggedIn} />
           </>
         )}
       </Flex>

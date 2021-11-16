@@ -13,9 +13,14 @@ import {
 
 import { useSidebarDrawer } from '../../hooks/useSidebarDrawer';
 import { DatePicker } from '../DatePicker';
+import { SignInButton } from '../Header/SignInButton';
 import { PetSelect } from '../PetSelect';
 
-export const Sidebar: React.FC = () => {
+type SidebarProps = {
+  isLoggedIn?: boolean;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ isLoggedIn = false }) => {
   const { isOpen, onClose } = useSidebarDrawer();
 
   return (
@@ -34,28 +39,34 @@ export const Sidebar: React.FC = () => {
           </DrawerHeader>
 
           <DrawerBody>
-            <Flex>
-              <Avatar
-                size="md"
-                name="Alexandre Monteiro"
-                src="https://github.com/monteiro-alexandre.png"
-              />
+          {!isLoggedIn && <SignInButton />}
 
-              <Box ml="4" textAlign="left">
-                <Text>Alexandre Monteiro</Text>
-                <Text color="gray.600" fontSize="small">
-                  alexandre.monteiro.bec@gmail.com
-                </Text>
-              </Box>
-            </Flex>
+            {isLoggedIn && (
+              <>
+                <Flex>
+                  <Avatar
+                    size="md"
+                    name="Alexandre Monteiro"
+                    src="https://github.com/monteiro-alexandre.png"
+                  />
 
-            <Box mt="40px">
-              <PetSelect />
-            </Box>
+                  <Box ml="4" textAlign="left">
+                    <Text>Alexandre Monteiro</Text>
+                    <Text color="gray.600" fontSize="small">
+                      alexandre.monteiro.bec@gmail.com
+                    </Text>
+                  </Box>
+                </Flex>
 
-            <Box mt="20px">
-              <DatePicker />
-            </Box>
+                <Box mt="40px">
+                  <PetSelect />
+                </Box>
+
+                <Box mt="20px">
+                  <DatePicker />
+                </Box>
+              </>
+            )}
           </DrawerBody>
         </DrawerContent>
       </DrawerOverlay>
