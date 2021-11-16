@@ -1,10 +1,13 @@
 import { useEffect } from 'react';
 
 import { usePet } from '../../hooks/usePet';
+import { useSidebarDrawer } from '../../hooks/useSidebarDrawer';
 import { Select } from '../Select';
 
 export const PetSelect = () => {
-  const { petList, loadPetList, changePet } = usePet();
+  const { petList, loadPetList, changePet, selectedPetId, selectedPetName } = usePet();
+
+  const { onClose } = useSidebarDrawer();
 
   const pets = petList.map(pet => {
     return {
@@ -13,8 +16,26 @@ export const PetSelect = () => {
     }
   });
 
-  const handleChangePet = (petId: any) => {
-    changePet(petId);
+  let pet;
+
+  if (selectedPetId) {
+    pet = {
+      value: selectedPetId, 
+      label: selectedPetName
+    }
+  } else {
+    pet = null;
+  }
+
+  const handleChangePet = (selectedPet: any) => {
+    changePet(selectedPet.value);
+
+    pet = {
+      value: selectedPet.value, 
+      label: selectedPet.label
+    }
+
+    onClose();
   }
 
   useEffect(() => {
@@ -30,8 +51,8 @@ export const PetSelect = () => {
       colorScheme="green"
       options={pets}
       placeholder="Escolha um Pet"
-      onChange={(item: any) => handleChangePet(item.value)}
-      closeMenuOnSelect={false}
+      value={pet}
+      onChange={(item: any) => handleChangePet(item)}      
     />
   );
 }

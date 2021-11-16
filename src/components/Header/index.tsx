@@ -1,17 +1,22 @@
 import React from 'react';
+import { RiMenuLine } from 'react-icons/ri';
 
-import { Box, Flex, Heading, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Flex, Heading, Icon, IconButton, useBreakpointValue } from '@chakra-ui/react';
 
 import { DatePicker } from '../DatePicker';
 import { PetSelect } from '../PetSelect';
 import { Profile } from './Profile';
 import { SignInButton } from './SignInButton';
+import { useSidebarDrawer } from '../../hooks/useSidebarDrawer';
+import { Sidebar } from '../Sidebar';
 
 type HeaderProps = {
   isLoggedIn?: boolean;
 };
 
 export const Header: React.FC<HeaderProps> = ({ isLoggedIn = false }) => {
+  const { onOpen } = useSidebarDrawer();
+
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true
@@ -58,6 +63,21 @@ export const Header: React.FC<HeaderProps> = ({ isLoggedIn = false }) => {
         {isLoggedIn && isWideVersion && <Profile />}
 
         {!isLoggedIn && isWideVersion && <SignInButton />}
+
+        {!isWideVersion && (
+          <>
+            <IconButton
+              aria-label="Open navigation"
+              icon={<Icon as={RiMenuLine} />}
+              fontSize="24"
+              variant="unstyled"
+              mr="2"
+              onClick={onOpen}
+            />
+
+            <Sidebar />
+          </>
+        )}
       </Flex>
     </Flex>
   );

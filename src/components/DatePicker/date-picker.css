@@ -1,0 +1,9 @@
+#my-custom-datepicker .react-datepicker__input-container {
+  width: inherit;
+}
+
+#my-custom-datepicker .react-datepicker-wrapper,
+#my-custom-datepicker .react-datepicker__input-container,
+#my-custom-datepicker .chakra-input__group {
+  width: 100%;
+}

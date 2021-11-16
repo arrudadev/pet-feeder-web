@@ -4,11 +4,12 @@ import { FaCalendarAlt } from 'react-icons/fa';
 
 import localePtBR from 'date-fns/locale/pt-BR';
 
-import { Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+import { Box, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { usePet } from '../../hooks/usePet';
+import { useSidebarDrawer } from '../../hooks/useSidebarDrawer';
 
 registerLocale('pt-BR', localePtBR);
 
@@ -21,22 +22,29 @@ const CustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
 ));
 
 export const DatePicker: React.FC = () => {
-  const { changeDate } = usePet();
+  const { changeDate, selectDate } = usePet();
 
-  const [value, setValue] = useState(new Date());
+  const { onClose } = useSidebarDrawer();
+
+  const [value, setValue] = useState(selectDate);
 
   function handleChangeDate(date: Date) {
     setValue(date);
     
     changeDate(date);
+
+    onClose();
   }
 
   return (
-    <ReactDatePicker
-      selected={value}
-      locale="pt-BR"
-      onChange={(date: Date) => handleChangeDate(date)}
-      customInput={<CustomInput />}
-    />
+    <Box id="my-custom-datepicker">
+      <ReactDatePicker
+        selected={value}
+        locale="pt-BR"
+        dateFormat="dd/MM/yyyy"
+        onChange={(date: Date) => handleChangeDate(date)}
+        customInput={<CustomInput />}
+      />
+    </Box>
   );
 };

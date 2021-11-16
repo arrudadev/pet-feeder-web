@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Drawer,
   DrawerBody,
@@ -6,40 +7,58 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  useBreakpointValue,
+  Flex,
+  Text
 } from '@chakra-ui/react';
 
-// import { useSidebarDrawer } from '../../contexts/SidebarDrawerContext';
-import { SidebarNav } from './SidebarNav';
+import { useSidebarDrawer } from '../../hooks/useSidebarDrawer';
+import { DatePicker } from '../DatePicker';
+import { PetSelect } from '../PetSelect';
 
 export const Sidebar: React.FC = () => {
-  // const { isOpen, onClose } = useSidebarDrawer();
-
-  // const isDrawerSidebar = useBreakpointValue({
-  //   base: true,
-  //   lg: false,
-  // });
-
-  // if (isDrawerSidebar) {
-  //   return (
-  //     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-  //       <DrawerOverlay>
-  //         <DrawerContent bg="gray.800" p="4">
-  //           <DrawerCloseButton mt="6" />
-  //           <DrawerHeader>Navegação</DrawerHeader>
-
-  //           <DrawerBody>
-  //             <SidebarNav />
-  //           </DrawerBody>
-  //         </DrawerContent>
-  //       </DrawerOverlay>
-  //     </Drawer>
-  //   );
-  // }
+  const { isOpen, onClose } = useSidebarDrawer();
 
   return (
-    <Box as="aside" w="64" mr="8">
-      <SidebarNav />
-    </Box>
+    <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+      <DrawerOverlay>
+        <DrawerContent p="4">
+          <DrawerCloseButton mt="6" />
+          <DrawerHeader 
+            fontSize="3xl"
+            fontWeight="bold"
+            letterSpacing="tight"
+            w="64"
+            color="green.500"
+          >
+            PetFeeder
+          </DrawerHeader>
+
+          <DrawerBody>
+            <Flex>
+              <Avatar
+                size="md"
+                name="Alexandre Monteiro"
+                src="https://github.com/monteiro-alexandre.png"
+              />
+
+              <Box ml="4" textAlign="left">
+                <Text>Alexandre Monteiro</Text>
+                <Text color="gray.600" fontSize="small">
+                  alexandre.monteiro.bec@gmail.com
+                </Text>
+              </Box>
+            </Flex>
+
+            <Box mt="40px">
+              <PetSelect />
+            </Box>
+
+            <Box mt="20px">
+              <DatePicker />
+            </Box>
+          </DrawerBody>
+        </DrawerContent>
+      </DrawerOverlay>
+    </Drawer>
   );
 };
