@@ -8,9 +8,7 @@ import { Text } from '@chakra-ui/react';
 
 const Data: NextPage = () => {
   return (
-    <Text>
-      Data page disabled
-    </Text>
+    <Text>Data page disabled</Text>
     // <Flex direction="column">
     //   <Header isLoggedIn />
 
@@ -26,7 +24,7 @@ const Data: NextPage = () => {
     //         <DayliControl useAllColumns />
     //       </Box>
     //     </Box>
-    //   </Flex>      
+    //   </Flex>
     // </Flex>
   );
 };

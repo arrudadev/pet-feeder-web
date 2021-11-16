@@ -80,5 +80,8 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/no-children-prop': 'off',
     '@typescript-eslint/no-empty-function': 'off',
+    'import/no-anonymous-default-export': 'off',
+    'no-return-assign': 'off',
+    'no-param-reassign': 'off',
   },
 };

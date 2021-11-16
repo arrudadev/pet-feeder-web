@@ -22,7 +22,13 @@ const Dashboard: NextPage = () => {
 
         <Flex w="100%" h="100%" my="6" maxW={1480} mx="auto" px="4">
           {hasPetSelected && (
-            <Flex mt="150px" alignItems="center" justifyContent="center" w="100%" h="100%">
+            <Flex
+              mt="150px"
+              alignItems="center"
+              justifyContent="center"
+              w="100%"
+              h="100%"
+            >
               <NoData />
             </Flex>
           )}
@@ -33,7 +39,11 @@ const Dashboard: NextPage = () => {
                 <Heading>Dashboard - {selectedPetName}</Heading>
               </Flex>
 
-              <SimpleGrid minChildWidth={['280px', '450px']} spacing="20px" mt="20px">
+              <SimpleGrid
+                minChildWidth={['280px', '450px']}
+                spacing="20px"
+                mt="20px"
+              >
                 <MealAccompaniment />
 
                 <AllMealAccompanimentChart />

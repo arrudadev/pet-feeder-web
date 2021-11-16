@@ -14,7 +14,7 @@ type Column = {
   title: string;
   field: string;
   id: string;
-}
+};
 
 type TableProps = {
   columns: Column[];
@@ -22,15 +22,17 @@ type TableProps = {
   height?: string;
 };
 
-export const Table: React.FC<TableProps> = ({ columns, rows, height }) => {  
-  const customHeight = height && height?.length > 0 ? height : '100%'
+export const Table: React.FC<TableProps> = ({ columns, rows, height }) => {
+  const customHeight = height && height?.length > 0 ? height : '100%';
 
   return (
     <Box w="100%" h={customHeight} overflowY="auto">
       <ChakraTable variant="striped" h={customHeight}>
         <Thead>
           {columns.map(column => (
-            <Th key={column.id} textAlign="center" position="sticky">{column.title}</Th>
+            <Th key={column.id} textAlign="center" position="sticky">
+              {column.title}
+            </Th>
           ))}
         </Thead>
 
@@ -38,7 +40,7 @@ export const Table: React.FC<TableProps> = ({ columns, rows, height }) => {
           {rows.map(row => (
             <Tr key={row.id}>
               {columns.map(column => (
-                <Td 
+                <Td
                   key={`row-${row.id}-column-${column.field}`}
                   textAlign="center"
                   position="relative"
@@ -52,7 +54,9 @@ export const Table: React.FC<TableProps> = ({ columns, rows, height }) => {
       </ChakraTable>
 
       <Flex mt="10px">
-        <Text fontSize="lg" mb="4" color="gray.600">Total {rows.length}</Text>
+        <Text fontSize="lg" mb="4" color="gray.600">
+          Total {rows.length}
+        </Text>
       </Flex>
     </Box>
   );

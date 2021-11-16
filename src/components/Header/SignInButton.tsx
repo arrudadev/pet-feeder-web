@@ -1,8 +1,8 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
+
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 import { Button, Image } from '@chakra-ui/react';
-
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 import { auth } from '../../services/firebase';
 
@@ -19,7 +19,7 @@ export const SignInButton: React.FC = () => {
     console.log(googleAccount);
 
     router.push('/dashboard');
-  }
+  };
 
   return (
     <Button

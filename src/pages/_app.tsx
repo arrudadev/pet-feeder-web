@@ -16,8 +16,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       <PetContextProvider>
         <SidebarDrawerContextProvider>
           <Component {...pageProps} />
-        </SidebarDrawerContextProvider>        
-      </PetContextProvider>      
+        </SidebarDrawerContextProvider>
+      </PetContextProvider>
     </ChakraProvider>
   );
 }

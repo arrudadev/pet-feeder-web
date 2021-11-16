@@ -1,7 +1,7 @@
-import { Flex, Text } from '@chakra-ui/react';
-
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+
+import { Flex, Text } from '@chakra-ui/react';
 
 import { usePet } from '../../hooks/usePet';
 import { BoxShadow } from '../BoxShadow';
@@ -12,16 +12,16 @@ export const MealAccompaniment: React.FC = () => {
   const { dayMealAccompaniment } = usePet();
 
   const columns = [
-    { 
+    {
       title: 'Horário da Refeição',
       field: 'datetime',
-      id: 'datetime-mealaccompaniment'
+      id: 'datetime-mealaccompaniment',
     },
-    { 
+    {
       title: 'Comeu no horário correto',
       field: 'status',
-      id: 'status-mealaccompaniment'
-    }
+      id: 'status-mealaccompaniment',
+    },
   ];
 
   const rows = dayMealAccompaniment.map((item, index) => {
@@ -30,8 +30,8 @@ export const MealAccompaniment: React.FC = () => {
       datetime: format(parseISO(item.datetime), 'HH:mm', {
         locale: ptBR,
       }),
-      status: item.status
-    }
+      status: item.status,
+    };
   });
 
   return (
@@ -42,13 +42,11 @@ export const MealAccompaniment: React.FC = () => {
         </Text>
       </Flex>
 
-      {rows.length === 0 && (
-        <NoData />
-      )}
+      {rows.length === 0 && <NoData />}
 
       {rows.length > 0 && (
         <Table columns={columns} rows={rows} height="250px" />
       )}
     </BoxShadow>
   );
-}
+};

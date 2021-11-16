@@ -1,14 +1,21 @@
 import React from 'react';
 import { RiMenuLine } from 'react-icons/ri';
 
-import { Box, Flex, Heading, Icon, IconButton, useBreakpointValue } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Heading,
+  Icon,
+  IconButton,
+  useBreakpointValue,
+} from '@chakra-ui/react';
 
+import { useSidebarDrawer } from '../../hooks/useSidebarDrawer';
 import { DatePicker } from '../DatePicker';
 import { PetSelect } from '../PetSelect';
+import { Sidebar } from '../Sidebar';
 import { Profile } from './Profile';
 import { SignInButton } from './SignInButton';
-import { useSidebarDrawer } from '../../hooks/useSidebarDrawer';
-import { Sidebar } from '../Sidebar';
 
 type HeaderProps = {
   isLoggedIn?: boolean;
@@ -19,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({ isLoggedIn = false }) => {
 
   const isWideVersion = useBreakpointValue({
     base: false,
-    lg: true
+    lg: true,
   });
 
   return (
@@ -49,9 +56,7 @@ export const Header: React.FC<HeaderProps> = ({ isLoggedIn = false }) => {
             PetFeeder
           </Heading>
 
-          {isLoggedIn && isWideVersion && (
-            <PetSelect />
-          )}
+          {isLoggedIn && isWideVersion && <PetSelect />}
 
           {isLoggedIn && isWideVersion && (
             <Box ml="20px">

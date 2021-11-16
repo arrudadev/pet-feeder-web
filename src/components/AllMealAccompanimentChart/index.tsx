@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react';
 
 import { usePet } from '../../hooks/usePet';
 import { BoxShadow } from '../BoxShadow';
@@ -8,7 +8,8 @@ import { PieChart } from '../PieChart';
 export const AllMealAccompanimentChart: React.FC = () => {
   const { allMealAccompanimentData } = usePet();
 
-  const noHasData = allMealAccompanimentData.mealAtTheRightTime === 0 &&
+  const noHasData =
+    allMealAccompanimentData.mealAtTheRightTime === 0 &&
     allMealAccompanimentData.notMealAtTheRightTime === 0;
 
   return (
@@ -23,11 +24,11 @@ export const AllMealAccompanimentChart: React.FC = () => {
         <PieChart
           labels={['Comeu no Horário', 'Não comeu no horário']}
           series={[
-            allMealAccompanimentData.mealAtTheRightTime, 
-            allMealAccompanimentData.notMealAtTheRightTime
+            allMealAccompanimentData.mealAtTheRightTime,
+            allMealAccompanimentData.notMealAtTheRightTime,
           ]}
         />
       )}
     </BoxShadow>
   );
-}
+};

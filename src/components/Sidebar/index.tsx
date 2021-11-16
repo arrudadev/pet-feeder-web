@@ -8,7 +8,7 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
-  Text
+  Text,
 } from '@chakra-ui/react';
 
 import { useSidebarDrawer } from '../../hooks/useSidebarDrawer';
@@ -18,7 +18,7 @@ import { PetSelect } from '../PetSelect';
 
 type SidebarProps = {
   isLoggedIn?: boolean;
-}
+};
 
 export const Sidebar: React.FC<SidebarProps> = ({ isLoggedIn = false }) => {
   const { isOpen, onClose } = useSidebarDrawer();
@@ -28,7 +28,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isLoggedIn = false }) => {
       <DrawerOverlay>
         <DrawerContent p="4">
           <DrawerCloseButton mt="6" />
-          <DrawerHeader 
+          <DrawerHeader
             fontSize="3xl"
             fontWeight="bold"
             letterSpacing="tight"
@@ -39,7 +39,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isLoggedIn = false }) => {
           </DrawerHeader>
 
           <DrawerBody>
-          {!isLoggedIn && <SignInButton />}
+            {!isLoggedIn && <SignInButton />}
 
             {isLoggedIn && (
               <>

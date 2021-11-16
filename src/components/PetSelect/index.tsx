@@ -5,24 +5,25 @@ import { useSidebarDrawer } from '../../hooks/useSidebarDrawer';
 import { Select } from '../Select';
 
 export const PetSelect = () => {
-  const { petList, loadPetList, changePet, selectedPetId, selectedPetName } = usePet();
+  const { petList, loadPetList, changePet, selectedPetId, selectedPetName } =
+    usePet();
 
   const { onClose } = useSidebarDrawer();
 
   const pets = petList.map(pet => {
     return {
-      value: pet.petId, 
-      label: pet.petName
-    }
+      value: pet.petId,
+      label: pet.petName,
+    };
   });
 
   let pet;
 
   if (selectedPetId) {
     pet = {
-      value: selectedPetId, 
-      label: selectedPetName
-    }
+      value: selectedPetId,
+      label: selectedPetName,
+    };
   } else {
     pet = null;
   }
@@ -31,17 +32,17 @@ export const PetSelect = () => {
     changePet(selectedPet.value);
 
     pet = {
-      value: selectedPet.value, 
-      label: selectedPet.label
-    }
+      value: selectedPet.value,
+      label: selectedPet.label,
+    };
 
     onClose();
-  }
+  };
 
   useEffect(() => {
     const fetchPets = async () => {
       await loadPetList();
-    }
+    };
 
     fetchPets();
   }, []);
@@ -52,7 +53,7 @@ export const PetSelect = () => {
       options={pets}
       placeholder="Escolha um Pet"
       value={pet}
-      onChange={(item: any) => handleChangePet(item)}      
+      onChange={(item: any) => handleChangePet(item)}
     />
   );
-}
+};

@@ -14,12 +14,5 @@ export const PieChart: React.FC<PieChartProps> = ({ labels, series }) => {
     labels,
   };
 
-  return (
-    <Chart
-      options={options}
-      series={series}
-      type="pie"
-      height={250}
-    />
-  );
+  return <Chart options={options} series={series} type="pie" height={250} />;
 };

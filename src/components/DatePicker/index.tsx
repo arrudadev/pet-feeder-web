@@ -30,7 +30,7 @@ export const DatePicker: React.FC = () => {
 
   function handleChangeDate(date: Date) {
     setValue(date);
-    
+
     changeDate(date);
 
     onClose();

@@ -1,35 +1,37 @@
-import { Flex, Text } from '@chakra-ui/react';
-
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+
+import { Flex, Text } from '@chakra-ui/react';
 
 import { usePet } from '../../hooks/usePet';
 import { BoxShadow } from '../BoxShadow';
 import { NoData } from '../NoData';
 import { Table } from '../Table';
 
-type DayliControlProps = {  
+type DayliControlProps = {
   height?: string;
-}
+};
 
-export const DayliControl: React.FC<DayliControlProps> = ({ height = "100%" }) => {
+export const DayliControl: React.FC<DayliControlProps> = ({
+  height = '100%',
+}) => {
   const { dayliControlData } = usePet();
 
   const columns = [
-    { 
+    {
       title: 'Data',
       field: 'date',
-      id: 'date-daylicontrol'
+      id: 'date-daylicontrol',
     },
-    { 
+    {
       title: 'Horário da Refeição',
       field: 'hour',
-      id: 'hour-daylicontrol'
+      id: 'hour-daylicontrol',
     },
-    { 
+    {
       title: 'Quantidade de Ração',
       field: 'weight',
-      id: 'weight-daylicontrol'
+      id: 'weight-daylicontrol',
     },
   ];
 
@@ -42,8 +44,8 @@ export const DayliControl: React.FC<DayliControlProps> = ({ height = "100%" }) =
       hour: format(parseISO(item.datetime), 'HH:mm', {
         locale: ptBR,
       }),
-      weight: item.weight
-    }
+      weight: item.weight,
+    };
   });
 
   return (
@@ -54,13 +56,11 @@ export const DayliControl: React.FC<DayliControlProps> = ({ height = "100%" }) =
         </Text>
       </Flex>
 
-      {rows.length === 0 && (
-        <NoData />
-      )}
+      {rows.length === 0 && <NoData />}
 
       {rows.length > 0 && (
         <Table columns={columns} rows={rows} height={height} />
       )}
     </BoxShadow>
   );
-}
+};

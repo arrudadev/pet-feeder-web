@@ -52,16 +52,9 @@ export const AreaChart: React.FC<AreaChartProps> = ({ categories, series }) => {
     },
   };
 
-  const seriesData = [
-    { name: 'Quantidade de Ração', data: series },
-  ];
+  const seriesData = [{ name: 'Quantidade de Ração', data: series }];
 
   return (
-    <Chart
-      options={options}
-      series={seriesData}
-      type="area"
-      height={250}
-    />
+    <Chart options={options} series={seriesData} type="area" height={250} />
   );
 };

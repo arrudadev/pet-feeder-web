@@ -8,15 +8,15 @@ type PetContextData = {
   selectedPetName: string;
   selectDate: Date;
   allMealAccompanimentData: {
-    mealAtTheRightTime: number,
-    notMealAtTheRightTime: number
+    mealAtTheRightTime: number;
+    notMealAtTheRightTime: number;
   };
   dayMealAccompaniment: any[];
   dayliControlData: any[];
   loadPetList: () => Promise<void>;
   changePet: (id: string) => Promise<void>;
   changeDate: (newDate: Date) => Promise<void>;
-}
+};
 
 export const PetContext = createContext({} as PetContextData);
 
@@ -31,7 +31,7 @@ export const PetContextProvider = ({ children }: PetContextProviderProps) => {
   const [selectDate, setSelectDate] = useState(new Date());
   const [allMealAccompanimentData, setAllMealAccompanimentData] = useState({
     mealAtTheRightTime: 0,
-    notMealAtTheRightTime: 0
+    notMealAtTheRightTime: 0,
   });
   const [dayMealAccompaniment, setDayMealAccompaniment] = useState([]);
   const [dayliControlData, setDayliControlData] = useState([]);
@@ -42,20 +42,18 @@ export const PetContextProvider = ({ children }: PetContextProviderProps) => {
     const { pets } = response.data;
 
     setPetList(pets);
-  }
+  };
 
   const updateData = (data: any) => {
     const {
       AllMealAccompaniment,
-      dayMealAccompaniment,
-      dayliControl
+      dayMealAccompaniment: dayMealAccompanimentData,
+      dayliControl,
     } = data;
-
-    
     setAllMealAccompanimentData(AllMealAccompaniment);
-    setDayMealAccompaniment(dayMealAccompaniment);
+    setDayMealAccompaniment(dayMealAccompanimentData);
     setDayliControlData(dayliControl);
-  }
+  };
 
   const changePet = async (id: string) => {
     const response = await api.post('/pets/dashboard', {
@@ -69,18 +67,18 @@ export const PetContextProvider = ({ children }: PetContextProviderProps) => {
     setSelectedPetName(petName);
 
     updateData(response.data);
-  }
+  };
 
   const changeDate = async (newDate: Date) => {
     const response = await api.post('/pets/dashboard', {
       petId: selectedPetId,
       date: newDate,
-    });    
+    });
 
     setSelectDate(newDate);
 
     updateData(response.data);
-  }
+  };
 
   return (
     <PetContext.Provider
@@ -94,10 +92,10 @@ export const PetContextProvider = ({ children }: PetContextProviderProps) => {
         dayliControlData,
         loadPetList,
         changePet,
-        changeDate
+        changeDate,
       }}
     >
       {children}
     </PetContext.Provider>
   );
-}
+};
