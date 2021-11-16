@@ -40,7 +40,7 @@ const Dashboard: NextPage = () => {
               </Flex>
 
               <SimpleGrid
-                minChildWidth={['280px', '450px']}
+                minChildWidth={['280px', '450px', '550px']}
                 spacing="20px"
                 mt="20px"
               >
