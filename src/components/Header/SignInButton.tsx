@@ -1,24 +1,12 @@
-import { useRouter } from 'next/router';
-
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-
 import { Button, Image } from '@chakra-ui/react';
 
-import { auth } from '../../services/firebase';
-
-const provider = new GoogleAuthProvider();
+import { useUser } from '../../hooks/useUser';
 
 export const SignInButton: React.FC = () => {
-  const router = useRouter();
+  const { googleLogin } = useUser();
 
   const handleSignIn = async () => {
-    const response = await signInWithPopup(auth, provider);
-
-    const googleAccount = response.user;
-
-    console.log(googleAccount);
-
-    router.push('/dashboard');
+    await googleLogin();
   };
 
   return (
