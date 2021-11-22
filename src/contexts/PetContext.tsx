@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useState } from 'react';
 
+import { useUser } from '../hooks/useUser';
 import { api } from '../services/api';
 
 type PetContextData = {
@@ -25,6 +26,8 @@ type PetContextProviderProps = {
 };
 
 export const PetContextProvider = ({ children }: PetContextProviderProps) => {
+  const { token } = useUser();
+
   const [petList, setPetList] = useState([]);
   const [selectedPetId, setSelectedPetId] = useState('');
   const [selectedPetName, setSelectedPetName] = useState('');
@@ -37,11 +40,13 @@ export const PetContextProvider = ({ children }: PetContextProviderProps) => {
   const [dayliControlData, setDayliControlData] = useState([]);
 
   const loadPetList = async () => {
-    const response = await api.post('/pets/list');
+    const response = await api.get(`/pet?token=${token}`);
 
-    const { pets } = response.data;
+    const { success, pets } = response.data;
 
-    setPetList(pets);
+    if (success) {
+      setPetList(pets);
+    }
   };
 
   const updateData = (data: any) => {
