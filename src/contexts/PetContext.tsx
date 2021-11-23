@@ -61,9 +61,10 @@ export const PetContextProvider = ({ children }: PetContextProviderProps) => {
   };
 
   const changePet = async (id: string) => {
-    const response = await api.post('/pets/dashboard', {
+    const response = await api.post('/pet/dashboard/', {
       petId: id,
-      date: selectDate,
+      date: selectDate.toISOString(),
+      token,
     });
 
     const { petId, petName } = response.data;
@@ -75,14 +76,17 @@ export const PetContextProvider = ({ children }: PetContextProviderProps) => {
   };
 
   const changeDate = async (newDate: Date) => {
-    const response = await api.post('/pets/dashboard', {
-      petId: selectedPetId,
-      date: newDate,
-    });
+    if (selectedPetId.length > 0) {
+      const response = await api.post('/pet/dashboard/', {
+        petId: selectedPetId,
+        date: newDate.toISOString(),
+        token,
+      });
 
-    setSelectDate(newDate);
+      setSelectDate(newDate);
 
-    updateData(response.data);
+      updateData(response.data);
+    }
   };
 
   return (
