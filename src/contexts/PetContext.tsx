@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useState } from 'react';
 
+import { Spinner } from '../components/Spinner';
 import { useUser } from '../hooks/useUser';
 import { api } from '../services/api';
 
@@ -39,13 +40,17 @@ export const PetContextProvider = ({ children }: PetContextProviderProps) => {
   const [dayMealAccompaniment, setDayMealAccompaniment] = useState([]);
   const [dayliControlData, setDayliControlData] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+
   const loadPetList = async () => {
+    setLoading(true);
     const response = await api.get(`/pet?token=${token}`);
 
     const { success, pets } = response.data;
 
     if (success) {
       setPetList(pets);
+      setLoading(false);
     }
   };
 
@@ -61,6 +66,8 @@ export const PetContextProvider = ({ children }: PetContextProviderProps) => {
   };
 
   const changePet = async (id: string) => {
+    setLoading(true);
+
     const response = await api.post('/pet/dashboard/', {
       petId: id,
       date: selectDate.toISOString(),
@@ -73,10 +80,14 @@ export const PetContextProvider = ({ children }: PetContextProviderProps) => {
     setSelectedPetName(petName);
 
     updateData(response.data);
+
+    setLoading(false);
   };
 
   const changeDate = async (newDate: Date) => {
     if (selectedPetId.length > 0) {
+      setLoading(true);
+
       const response = await api.post('/pet/dashboard/', {
         petId: selectedPetId,
         date: newDate.toISOString(),
@@ -86,6 +97,8 @@ export const PetContextProvider = ({ children }: PetContextProviderProps) => {
       setSelectDate(newDate);
 
       updateData(response.data);
+
+      setLoading(false);
     }
   };
 
@@ -105,6 +118,7 @@ export const PetContextProvider = ({ children }: PetContextProviderProps) => {
       }}
     >
       {children}
+      <Spinner visible={loading} />
     </PetContext.Provider>
   );
 };

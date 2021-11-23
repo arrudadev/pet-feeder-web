@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
+import { Spinner } from '../components/Spinner';
 import { auth } from '../services/firebase';
 
 type UserContextProviderProps = {
@@ -30,7 +31,10 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   const [userPhotoUrl, setUserPhotoUrl] = useState('');
   const [token, setToken] = useState('');
 
+  const [loading, setLoading] = useState(false);
+
   async function googleLogin() {
+    setLoading(true);
     const response = await signInWithPopup(auth, provider);
 
     const googleAccount = response.user;
@@ -42,6 +46,8 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     setUserPhotoUrl(googleAccount.photoURL || '');
     setToken(currentUserToken || '');
 
+    setLoading(false);
+
     router.push('/dashboard');
   }
 
@@ -50,6 +56,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       value={{ userName, userEmail, userPhotoUrl, token, googleLogin }}
     >
       {children}
+      <Spinner visible={loading} />
     </UserContext.Provider>
   );
 }
